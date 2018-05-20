@@ -36,4 +36,21 @@ public class ImageChooser {
         return image;
     }
 
+    public void saveImage(BufferedImage image, JFrame frame) {
+        JFileChooser jfc = new JFileChooser();
+        int dialogValue = jfc.showSaveDialog(frame);
+
+        if (dialogValue == JFileChooser.APPROVE_OPTION) {
+
+            File out = jfc.getSelectedFile();
+            try {
+                ImageIO.write(image, "jpg", out);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+
 }

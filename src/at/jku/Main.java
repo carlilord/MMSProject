@@ -10,7 +10,9 @@ public class Main {
 
     private static JFrame frame;
     private static ImageChooser imageChooser = new ImageChooser();
-
+    private static BufferedImage baseImage;
+    private static JButton openBtn;
+    private static JButton saveBtn;
 
     public static void main(String[] args) {
 
@@ -31,13 +33,42 @@ public class Main {
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
-           BufferedImage image = imageChooser.chooseImage(frame);
-
            JPanel panel = new JPanel();
            frame.getContentPane().add(panel,BorderLayout.NORTH);
 
-           JLabel label = new JLabel(new ImageIcon(image));
-           panel.add(label);
+
+            // OPEN BUTTON
+            ImageIcon openIcon = new ImageIcon("resources/openIcon.png");
+            openBtn = new JButton(openIcon);
+            openBtn.setPreferredSize(new Dimension(35, 35));
+            openBtn.addActionListener(a -> {
+                baseImage = imageChooser.chooseImage(frame);
+                JLabel label = new JLabel(new ImageIcon(baseImage));
+                frame.getContentPane().add(label, BorderLayout.CENTER);
+                frame.pack();
+                frame.validate();
+                frame.repaint();
+            });
+            panel.add(openBtn);
+
+            // SAVE BUTTON
+            ImageIcon saveIcon = new ImageIcon("resources/saveIcon.png");
+            saveBtn = new JButton(saveIcon);
+            saveBtn.setPreferredSize(new Dimension(35, 35));
+            saveBtn.addActionListener(a -> {
+
+                if (baseImage == null) {
+                    JOptionPane.showMessageDialog(frame, "Please select an image first", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                imageChooser.saveImage(baseImage, frame);
+                JOptionPane.showMessageDialog(frame, "Image saved succesfully ", "SAVED", JOptionPane.INFORMATION_MESSAGE);
+
+            });
+            panel.add(saveBtn);
+
+
 
             return  frame;
     }
