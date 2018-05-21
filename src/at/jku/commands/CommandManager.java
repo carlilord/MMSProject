@@ -10,6 +10,7 @@ public class CommandManager {
     public CommandManager() {
         commands = new ArrayList<Command>();
         commands.add(new ScaleImageCommand());
+        commands.add(new AddTextCommand());
     }
 
     public Command[] getCommands() {
