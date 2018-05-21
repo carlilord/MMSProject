@@ -1,5 +1,7 @@
 package at.jku;
 
+import at.jku.commands.Command;
+import at.jku.commands.CommandManager;
 import at.jku.misc.ImageChooser;
 
 import javax.swing.*;
@@ -8,11 +10,19 @@ import java.awt.image.BufferedImage;
 
 public class Main {
 
-    private static JFrame frame;
+    public static JFrame frame;
     private static ImageChooser imageChooser = new ImageChooser();
-    private static BufferedImage baseImage;
+
+    public static BufferedImage baseImage;
+    public static JLabel baseImageLabel;
+
+
     private static JButton openBtn;
     private static JButton saveBtn;
+
+
+    private static JComboBox<Command> commandsComboBox;
+    private static CommandManager commandManager = new CommandManager();
 
     public static void main(String[] args) {
 
@@ -43,8 +53,8 @@ public class Main {
             openBtn.setPreferredSize(new Dimension(35, 35));
             openBtn.addActionListener(a -> {
                 baseImage = imageChooser.chooseImage(frame);
-                JLabel label = new JLabel(new ImageIcon(baseImage));
-                frame.getContentPane().add(label, BorderLayout.CENTER);
+                baseImageLabel = new JLabel(new ImageIcon(baseImage));
+                frame.getContentPane().add(baseImageLabel, BorderLayout.CENTER);
                 frame.pack();
                 frame.validate();
                 frame.repaint();
@@ -68,6 +78,14 @@ public class Main {
             });
             panel.add(saveBtn);
 
+            // Command Drop down menu
+            commandsComboBox = new JComboBox<>(new DefaultComboBoxModel<>(commandManager.getCommands()));
+            commandsComboBox.setPreferredSize(new Dimension(100, 35));
+            commandsComboBox.addActionListener(a -> {
+                Command selectedCommand = (Command) commandsComboBox.getSelectedItem();
+                selectedCommand.execute(baseImage);
+            });
+            panel.add(commandsComboBox);
 
 
             return  frame;
