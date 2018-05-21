@@ -1,6 +1,6 @@
 package at.jku.commands;
 
-import at.jku.Main;
+import at.jku.data.DataManager;
 import at.jku.misc.ImageHelper;
 
 import javax.swing.*;
@@ -11,28 +11,28 @@ public class ScaleImageCommand implements Command {
 
 
     @Override
-    public BufferedImage execute(BufferedImage image) {
+    public BufferedImage execute(DataManager dm) {
 
-        if (Main.baseImage == null) {
-            JOptionPane.showMessageDialog(Main.frame, "SELECT AN IMAGE FIRST", "ERROR", JOptionPane.ERROR_MESSAGE);
-            return image;
+        if (dm.baseImage == null) {
+            JOptionPane.showMessageDialog(dm.frame, "SELECT AN IMAGE FIRST", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return dm.baseImage;
         }
 
 
-        String scalingFactor = JOptionPane.showInputDialog(Main.frame, "Image scale factor : ");
-        BufferedImage scaledImage = image;
+        String scalingFactor = JOptionPane.showInputDialog(dm.frame, "Image scale factor : ");
+        BufferedImage scaledImage = dm.baseImage;
         try {
             int scaling = Integer.parseInt(scalingFactor);
-            scaledImage = ImageHelper.scaleImage(image, image.getWidth() * scaling, image.getHeight() * scaling, Image.SCALE_SMOOTH);
-            Main.baseImage = scaledImage;
-            Main.baseImageLabel = new JLabel(new ImageIcon(scaledImage));
-            Main.frame.remove(Main.baseImageLabel);
-            Main.frame.add(Main.baseImageLabel);
-            Main.frame.pack();
-            Main.frame.validate();
-            Main.frame.repaint();
+            scaledImage = ImageHelper.scaleImage(dm.baseImage, dm.baseImage.getWidth() * scaling, dm.baseImage.getHeight() * scaling, Image.SCALE_SMOOTH);
+            dm.baseImage = scaledImage;
+            dm.baseImageLabel = new JLabel(new ImageIcon(scaledImage));
+            dm.frame.remove(dm.baseImageLabel);
+            dm.frame.add(dm.baseImageLabel);
+            dm.frame.pack();
+            dm.frame.validate();
+            dm.frame.repaint();
         } catch (ClassCastException e) {
-            JOptionPane.showMessageDialog(Main.frame, "ONLY NUMBERS ALLOWED", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(dm.frame, "ONLY NUMBERS ALLOWED", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return scaledImage;
     }
