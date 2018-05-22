@@ -9,7 +9,7 @@ public class ImageHelper {
         BufferedImage scaled;
         int type = BufferedImage.TYPE_INT_ARGB;
 
-        float s = 1.0f;
+        float s;
         float wFactor = (float) maxWidth / (float) image.getWidth();
         float hFactor = (float) maxHeight / (float) image.getHeight();
         if (wFactor < hFactor) {
