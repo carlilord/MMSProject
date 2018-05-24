@@ -2,6 +2,7 @@ package at.jku.data;
 
 import at.jku.commands.Command;
 import at.jku.commands.CommandManager;
+import at.jku.data.userdialogs.SimpleSliderDialog;
 import at.jku.misc.ImageHelper;
 
 import javax.swing.*;
@@ -75,7 +76,6 @@ public class DataManager {
             selectedCommand.execute(this);
         });
         panel.add(commandsComboBox);
-
 
         return frame;
     }

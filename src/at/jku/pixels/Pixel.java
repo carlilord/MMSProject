@@ -30,10 +30,10 @@ public class Pixel {
      * @param alpha
      */
     public Pixel(int r, int g, int b, int alpha) {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.alpha = alpha;
+        this.r = byteRange(r);
+        this.g = byteRange(g);
+        this.b = byteRange(b);
+        this.alpha = byteRange(alpha);
         updateRawFromRGB();
         updateYCbCrFromRGB();
     }
@@ -45,9 +45,9 @@ public class Pixel {
      * @param cr
      */
     public Pixel(int y, int cb, int cr) {
-        this.y = y;
-        this.cb = cb;
-        this.cr = cr;
+        this.y = byteRange(y);
+        this.cb = byteRange(cb);
+        this.cr = byteRange(cr);
         updateRGBFromYCbCr();
         updateRawFromRGB();
     }
@@ -95,7 +95,7 @@ public class Pixel {
     }
 
     public void setAlpha(int alpha) {
-        this.alpha = alpha;
+        this.alpha = byteRange(alpha);
         updateRawFromRGB();
         updateYCbCrFromRGB();
     }
@@ -105,7 +105,7 @@ public class Pixel {
     }
 
     public void setR(int r) {
-        this.r = r;
+        this.r = byteRange(r);
         updateRawFromRGB();
         updateYCbCrFromRGB();
     }
@@ -115,7 +115,7 @@ public class Pixel {
     }
 
     public void setG(int g) {
-        this.g = g;
+        this.g = byteRange(g);
         updateRawFromRGB();
         updateYCbCrFromRGB();
     }
@@ -125,7 +125,7 @@ public class Pixel {
     }
 
     public void setB(int b) {
-        this.b = b;
+        this.b = byteRange(b);
         updateRawFromRGB();
         updateYCbCrFromRGB();
     }
@@ -135,7 +135,7 @@ public class Pixel {
     }
 
     public void setY(int y) {
-        this.y = y;
+        this.y = byteRange(y);
         updateRGBFromYCbCr();
         updateRawFromRGB();
     }
@@ -145,7 +145,7 @@ public class Pixel {
     }
 
     public void setCb(int cb) {
-        this.cb = cb;
+        this.cb = byteRange(cb);
         updateRGBFromYCbCr();
         updateRawFromRGB();
     }
@@ -155,7 +155,7 @@ public class Pixel {
     }
 
     public void setCr(int cr) {
-        this.cr = cr;
+        this.cr = byteRange(cr);
         updateRGBFromYCbCr();
         updateRawFromRGB();
     }
@@ -179,18 +179,18 @@ public class Pixel {
 
     /** Create single rgb values form a raw int */
     private void updateRGBFromInt() {
-        r = Pixel.getRed(rawRGBA);
-        g = Pixel.getGreen(rawRGBA);
-        b = Pixel.getBlue(rawRGBA);
-        alpha = Pixel.getAlpha(rawRGBA);
+        r = byteRange(Pixel.getRed(rawRGBA));
+        g = byteRange(Pixel.getGreen(rawRGBA));
+        b = byteRange(Pixel.getBlue(rawRGBA));
+        alpha = byteRange(Pixel.getAlpha(rawRGBA));
     }
 
     /** Generate YCbCr values from rgb
      * @see http://en.wikipedia.org/wiki/YCbCr and lecture slides */
     private void updateYCbCrFromRGB() {
-        y = (int)(0.299*r+0.587*g+0.114*b);
-        cb=(int)(128-0.169*r-0.331*g+0.500*b);
-        cr =(int)(128+0.500*r-0.419*g-0.081*b);
+        y = byteRange((int)(0.299*r+0.587*g+0.114*b));
+        cb = byteRange((int)(128-0.169*r-0.331*g+0.500*b));
+        cr = byteRange((int)(128+0.500*r-0.419*g-0.081*b));
     }
 
     /** Genrate RGB from YCbCr values
@@ -198,9 +198,9 @@ public class Pixel {
     private void updateRGBFromYCbCr() {
         // we assume full alpha
         alpha = 255;
-        r = (int)((298.082*y/256) + (408.583*cr/256) - 222.921);
-        g = (int)((298.082*y/256) - (100.291*cb/256) - (208.12*cr/256) + 135.576);
-        b = (int)((298.082*y/256) + (516.412*cb/256) - 276.836);
+        r = byteRange((int)((298.082*y/256) + (408.583*cr/256) - 222.921));
+        g = byteRange((int)((298.082*y/256) - (100.291*cb/256) - (208.12*cr/256) + 135.576));
+        b = byteRange((int)((298.082*y/256) + (516.412*cb/256) - 276.836));
     }
 
     /**
