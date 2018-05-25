@@ -6,9 +6,11 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class SimpleSliderDialog {
-    public static JOptionPane getSlider(Component parent, String message) {
+    public static JOptionPane getSlider(Component parent, String message, int min, int max) {
         JOptionPane optionPane = new JOptionPane();
         JSlider slider = buildSlider(optionPane);
+        slider.setMinimum(min);
+        slider.setMaximum(max);
         optionPane.setMessage(new Object[] { "Select a value: ", slider });
         optionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
         optionPane.setOptionType(JOptionPane.OK_CANCEL_OPTION);
@@ -19,9 +21,6 @@ public class SimpleSliderDialog {
 
     private static JSlider buildSlider(final JOptionPane optionPane) {
         JSlider slider = new JSlider();
-        slider.setMajorTickSpacing(10);
-        slider.setMinimum(0);
-        slider.setMaximum(100);
         slider.setPaintTicks(true);
         slider.setPaintLabels(true);
         ChangeListener changeListener = changeEvent -> {

@@ -2,8 +2,8 @@ package at.jku.data;
 
 import at.jku.misc.UserInput;
 
-import javax.swing.*;
 import java.awt.*;
+import java.util.Properties;
 
 public class UserDialogChooser {
     private String[] config;
@@ -14,17 +14,19 @@ public class UserDialogChooser {
     private int max;
     private int def;
     private UserInput userInput;
+    private Properties properties;
 
     public UserDialogChooser(String[] config, UserInput userInput) {
         this.config = config;
         min = -1;
         max = -1;
         this.userInput = userInput;
+        properties = new Properties();
     }
 
     /** Ask the user for a value */
-    public int[] askValue(Component parent) {
-        int[] results = new int[config.length];
+    public Properties askValue(Component parent) {
+        int value;
         for (int i = 0; i < config.length; i++) {
             StringBuffer buffer = new StringBuffer();
             buffer.append("Enter a value for " + name);
@@ -37,27 +39,26 @@ public class UserDialogChooser {
             }
             String msg = buffer.toString();
 
-            String val = JOptionPane.showInputDialog(parent, msg, "" + def);
+            String val = UserDialogFactory.getValueForUserInputType(parent, "Enter a value for " + name, userInput, min, max);
+            //String val = JOptionPane.showInputDialog(parent, msg, "" + def);
 
             try {
                 int intValue = Integer.parseInt(val);
                 if(i < min) {
-                    results[i] = min;
+                    value = min;
                 } else if(i > max) {
-                    results[i] =  max;
+                    value =  max;
                 } else {
-                    results[i] = intValue;
+                    value = intValue;
                 }
             } catch (Exception e) {
-                results[i] =  def;
+                value =  def;
             }
+
+            properties.setProperty(name, String.valueOf(value));
         }
 
-        return results;
-    }
-
-    public String getName() {
-        return name;
+        return properties;
     }
 
     private void parseConfig(String configuration) {

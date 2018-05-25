@@ -28,8 +28,9 @@ public class DataManager {
     }
 
     private JFrame createFrame() {
-        frame = new JFrame("73");
+        frame = new JFrame("Photoshop 2.0");
         frame.getContentPane().setLayout(new BorderLayout());
+        frame.setPreferredSize(new Dimension(600, 600));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
@@ -74,6 +75,9 @@ public class DataManager {
         commandsComboBox.addActionListener(a -> {
             Command selectedCommand = (Command) commandsComboBox.getSelectedItem();
             selectedCommand.execute(this);
+            if(baseImageLabel != null) {
+                baseImageLabel.updateUI();
+            }
         });
         panel.add(commandsComboBox);
 
