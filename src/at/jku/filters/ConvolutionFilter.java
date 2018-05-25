@@ -57,7 +57,6 @@ public class ConvolutionFilter implements Filter {
 
     @Override
     public void applyFilter(BufferedImage image, Properties settings) {
-
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
                 Pixel p = new Pixel(image.getRGB(x,y));

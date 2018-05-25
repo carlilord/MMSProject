@@ -1,8 +1,6 @@
 package at.jku.commands;
 
-import at.jku.filters.ConvolutionFilter;
-import at.jku.filters.ConvolutionType;
-import at.jku.filters.SepiaFilter;
+import at.jku.filters.*;
 
 import java.util.ArrayList;
 
@@ -22,6 +20,9 @@ public class CommandManager {
         commands.add(new FilterCommand(new ConvolutionFilter(ConvolutionType.BLUR)));
         commands.add(new FilterCommand(new ConvolutionFilter(ConvolutionType.MEAN)));
         commands.add(new FilterCommand(new ConvolutionFilter(ConvolutionType.MOTION)));
+        commands.add(new FilterCommand(new GreyScaleFilter()));
+        commands.add(new FilterCommand(new GammaCorrectionFilter()));
+        commands.add(new FilterCommand(new RGBFilter()));
     }
 
     public Command[] getCommands() {

@@ -26,8 +26,9 @@ public class UserDialogChooser {
 
     /** Ask the user for a value */
     public Properties askValue(Component parent) {
-        int value;
+        double value;
         for (int i = 0; i < config.length; i++) {
+            parseConfig(config[i]);
             StringBuffer buffer = new StringBuffer();
             buffer.append("Enter a value for " + name);
             if(min != -1 && max != -1) {
@@ -40,16 +41,15 @@ public class UserDialogChooser {
             String msg = buffer.toString();
 
             String val = UserDialogFactory.getValueForUserInputType(parent, "Enter a value for " + name, userInput, min, max);
-            //String val = JOptionPane.showInputDialog(parent, msg, "" + def);
 
             try {
-                int intValue = Integer.parseInt(val);
+                double doubleValue = Double.parseDouble(val);
                 if(i < min) {
                     value = min;
                 } else if(i > max) {
                     value =  max;
                 } else {
-                    value = intValue;
+                    value = doubleValue;
                 }
             } catch (Exception e) {
                 value =  def;
@@ -66,7 +66,7 @@ public class UserDialogChooser {
         name = options[0];
         type = options[1].charAt(0);
         if(options.length > 2) {
-            String[] minmax = options[2].split("-");
+            String[] minmax = options[2].split("#");
             min = Integer.parseInt(minmax[0]);
             max = Integer.parseInt(minmax[1]);
             if(options.length > 3) {
