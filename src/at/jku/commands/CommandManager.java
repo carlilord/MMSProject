@@ -14,6 +14,9 @@ public class CommandManager {
         commands.add(new ScaleImageCommand());
         commands.add(new AddTextCommand());
         commands.add(new FilterCommand(new SepiaFilter()));
+        commands.add(new AddImageCommand());
+        commands.add(new SharpenImage());
+        commands.add(new BlurImage());
     }
 
     public Command[] getCommands() {

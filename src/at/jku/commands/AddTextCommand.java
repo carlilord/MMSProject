@@ -31,8 +31,8 @@ public class AddTextCommand implements Command{
         }
         
         String text = JOptionPane.showInputDialog(dm.frame, "Text you want to add: ");
-        String xPosition = JOptionPane.showInputDialog(dm.frame, "Position x coordinate: " + "(Image width is " + dm.baseImage.getWidth());
-        String yPosition = JOptionPane.showInputDialog(dm.frame, "Position x coordinate: " + "(Image height is " + dm.baseImage.getHeight());
+        String xPosition = JOptionPane.showInputDialog(dm.frame, "Position x coordinate for text: " + "(Image width is " + dm.baseImage.getWidth());
+        String yPosition = JOptionPane.showInputDialog(dm.frame, "Position y coordinate for text: " + "(Image height is " + dm.baseImage.getHeight());
         String size = JOptionPane.showInputDialog(dm.frame, "Text size: ");
         
         try{
