@@ -1,5 +1,7 @@
 package at.jku.commands;
 
+import at.jku.filters.ConvolutionFilter;
+import at.jku.filters.ConvolutionType;
 import at.jku.filters.SepiaFilter;
 
 import java.util.ArrayList;
@@ -17,6 +19,9 @@ public class CommandManager {
         commands.add(new AddImageCommand());
         commands.add(new SharpenImage());
         commands.add(new BlurImage());
+        commands.add(new FilterCommand(new ConvolutionFilter(ConvolutionType.BLUR)));
+        commands.add(new FilterCommand(new ConvolutionFilter(ConvolutionType.MEAN)));
+        commands.add(new FilterCommand(new ConvolutionFilter(ConvolutionType.MOTION)));
     }
 
     public Command[] getCommands() {

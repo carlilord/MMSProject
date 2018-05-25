@@ -33,6 +33,6 @@ public class SepiaFilter implements Filter{
 
     @Override
     public String toString() {
-        return SepiaFilter.class.getTypeName();
+        return SepiaFilter.class.getSimpleName();
     }
 }
