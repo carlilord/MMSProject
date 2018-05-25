@@ -7,6 +7,6 @@ import java.awt.image.BufferedImage;
 public interface Command {
 
 
-    public void execute(DataManager dm);
+    public BufferedImage execute(DataManager dm);
 
 }

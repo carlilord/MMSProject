@@ -18,10 +18,10 @@ public class FilterCommand implements Command {
     }
 
     @Override
-    public void execute(DataManager dm) {
+    public BufferedImage execute(DataManager dm) {
         if (dm.baseImage == null) {
             JOptionPane.showMessageDialog(dm.frame, "SELECT AN IMAGE FIRST", "ERROR", JOptionPane.ERROR_MESSAGE);
-            return;
+            return dm.baseImage;
         }
 
         PropertyType mandatoryProperties = filter.getMandatoryProperties();
@@ -30,6 +30,8 @@ public class FilterCommand implements Command {
                 mandatoryProperties.getUserInput())
                     .askValue(dm.frame);
         filter.applyFilter(dm.baseImage, properties);
+
+        return dm.baseImage;
     }
 
     @Override
