@@ -37,6 +37,7 @@ public class DataManager {
 
     private JFrame createFrame() {
         frame = new JFrame("Photoshop 2.0");
+        frame.setResizable(false);
         frame.getContentPane().setLayout(new BorderLayout());
         frame.setPreferredSize(new Dimension(600, 600));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
