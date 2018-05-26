@@ -5,16 +5,11 @@
  */
 package at.jku.commands;
 
-import at.jku.Main;
 import at.jku.data.DataManager;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import javax.swing.ImageIcon;
-import javax.swing.JColorChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,8 +43,8 @@ public class AddTextCommand implements Command{
             g.setColor(color);
             g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, textSize));
             g.drawString(text, xPos, yPos);
-            dm.baseImageLabel = new JLabel(new ImageIcon(textImage));
             dm.frame.remove(dm.baseImageLabel);
+            dm.baseImageLabel = new JLabel(new ImageIcon(textImage));
             dm.frame.add(dm.baseImageLabel);
             dm.frame.pack();
             dm.frame.validate();

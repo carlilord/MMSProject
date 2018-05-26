@@ -7,12 +7,10 @@ package at.jku.commands;
 
 import at.jku.data.DataManager;
 import at.jku.misc.ImageHelper;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,8 +40,8 @@ public class AddImageCommand implements Command{
             g.drawImage(firstImage, 0, 0, null);
             g.drawImage(addImage, xPos, yPos, null);
             g.dispose();
-            dm.baseImageLabel = new JLabel(new ImageIcon(firstImage));
             dm.frame.remove(dm.baseImageLabel);
+            dm.baseImageLabel = new JLabel(new ImageIcon(firstImage));
             dm.frame.add(dm.baseImageLabel);
             dm.frame.pack();
             dm.frame.validate();
