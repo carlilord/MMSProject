@@ -3,7 +3,6 @@ package at.jku.data;
 import at.jku.commands.AddImageCommand;
 import at.jku.commands.Command;
 import at.jku.commands.CommandManager;
-import at.jku.data.userdialogs.SimpleSliderDialog;
 import at.jku.misc.ImageHelper;
 
 import javax.imageio.ImageIO;
@@ -39,7 +38,7 @@ public class DataManager {
         frame = new JFrame("Photoshop 2.0");
         frame.setResizable(false);
         frame.getContentPane().setLayout(new BorderLayout());
-        frame.setPreferredSize(new Dimension(600, 600));
+        frame.setPreferredSize(new Dimension(800, 800));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
