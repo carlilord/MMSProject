@@ -59,8 +59,8 @@ public class AddImageCommand implements Command{
             g.drawImage(firstImage, 0, 0, null);
             g.drawImage(addImage, x, y, null);
             g.dispose();
-            dm.baseImageLabel = new JLabel(new ImageIcon(firstImage));
             dm.frame.remove(dm.baseImageLabel);
+            dm.baseImageLabel = new JLabel(new ImageIcon(firstImage));
             dm.frame.add(dm.baseImageLabel);
             dm.frame.pack();
             dm.frame.validate();

@@ -22,17 +22,17 @@ public class ScaleImageCommand implements Command {
         String scalingFactor = JOptionPane.showInputDialog(dm.frame, "Image scale factor : ");
         BufferedImage scaledImage = dm.baseImage;
         try {
-            int scaling = Integer.parseInt(scalingFactor);
-            scaledImage = ImageHelper.scaleImage(dm.baseImage, dm.baseImage.getWidth() * scaling, dm.baseImage.getHeight() * scaling, Image.SCALE_SMOOTH);
+            double scaling = Double.parseDouble(scalingFactor);
+            scaledImage = ImageHelper.scaleImage(dm.baseImage, (int) (dm.baseImage.getWidth() * scaling), (int) (dm.baseImage.getHeight() * scaling), Image.SCALE_SMOOTH);
             dm.baseImage = scaledImage;
-            dm.baseImageLabel = new JLabel(new ImageIcon(scaledImage));
             dm.frame.remove(dm.baseImageLabel);
+            dm.baseImageLabel = new JLabel(new ImageIcon(scaledImage));
             dm.frame.add(dm.baseImageLabel);
             dm.frame.pack();
             dm.frame.validate();
             dm.frame.repaint();
-        } catch (ClassCastException e) {
-            JOptionPane.showMessageDialog(dm.frame, "ONLY NUMBERS ALLOWED", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassCastException | NumberFormatException e) {
+            JOptionPane.showMessageDialog(dm.frame, "ONLY DOUBLE NUMBERS ALLOWED", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return scaledImage;
     }

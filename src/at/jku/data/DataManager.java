@@ -1,8 +1,8 @@
 package at.jku.data;
 
-import at.jku.commands.AddImageCommand;
 import at.jku.commands.Command;
 import at.jku.commands.CommandManager;
+import at.jku.data.userdialogs.SimpleSliderDialog;
 import at.jku.misc.ImageHelper;
 
 import javax.imageio.ImageIO;
@@ -23,7 +23,6 @@ public class DataManager {
     public JLabel baseImageLabel;
 
 
-    private JButton openBtn;
     private JList list;
     private ArrayList<ImageIcon> imageList;
 
@@ -48,17 +47,20 @@ public class DataManager {
 
         // OPEN BUTTON
         ImageIcon openIcon = new ImageIcon("resources/openIcon.png");
-        openBtn = new JButton(openIcon);
+        JButton openBtn = new JButton(openIcon);
         openBtn.setPreferredSize(new Dimension(35, 35));
         openBtn.addActionListener(a -> {
+
+            if (baseImageLabel != null) {
+                frame.remove(baseImageLabel);
+            }
+
             baseImage = ImageHelper.chooseImage(frame);
             baseImageLabel = new JLabel(new ImageIcon(baseImage));
             frame.getContentPane().add(baseImageLabel, BorderLayout.CENTER);
             frame.pack();
             frame.validate();
             frame.repaint();
-//            new AddImageCommand(2000, 2000, (BufferedImage) imageList.get(0).getImage()).execute(this);
-//            baseImageLabel.updateUI();
         });
         panel.add(openBtn);
 
@@ -74,7 +76,7 @@ public class DataManager {
             }
 
             ImageHelper.saveImage(baseImage, frame);
-            JOptionPane.showMessageDialog(frame, "Image saved succesfully ", "SAVED", JOptionPane.INFORMATION_MESSAGE);
+
 
         });
         panel.add(saveBtn);

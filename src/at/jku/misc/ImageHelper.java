@@ -65,7 +65,7 @@ public class ImageHelper {
 
         }
 
-        return image;
+        return ImageHelper.scaleImage(image, 600, 600, Image.SCALE_SMOOTH);
     }
 
     public static void saveImage(BufferedImage image, JFrame frame) {
@@ -77,9 +77,12 @@ public class ImageHelper {
             File out = jfc.getSelectedFile();
             try {
                 ImageIO.write(image, "jpg", out);
+                JOptionPane.showMessageDialog(frame, "Image saved succesfully ", "SAVED", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(frame, "Image not saved ", "NOT SAVED", JOptionPane.INFORMATION_MESSAGE);
         }
 
 

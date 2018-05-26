@@ -6,14 +6,13 @@
 package at.jku.commands;
 
 import at.jku.data.DataManager;
-import java.awt.Graphics;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,9 +40,9 @@ public class SharpenImage implements Command {
         g.dispose();
         BufferedImageOp biop = new ConvolveOp(kernel);
         sharpImage = biop.filter(sharpImage, null);
-        
-        dm.baseImageLabel = new JLabel(new ImageIcon(sharpImage));
+
             dm.frame.remove(dm.baseImageLabel);
+        dm.baseImageLabel = new JLabel(new ImageIcon(sharpImage));
             dm.frame.add(dm.baseImageLabel);
             dm.frame.pack();
             dm.frame.validate();
