@@ -1,13 +1,19 @@
 package at.jku.data;
 
+import at.jku.commands.AddImageCommand;
 import at.jku.commands.Command;
 import at.jku.commands.CommandManager;
-import at.jku.data.userdialogs.SimpleSliderDialog;
 import at.jku.misc.ImageHelper;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class DataManager {
 
@@ -18,6 +24,8 @@ public class DataManager {
 
 
     private JButton openBtn;
+    private JList list;
+    private ArrayList<ImageIcon> imageList;
 
 
     public JComboBox<Command> commandsComboBox;
@@ -49,6 +57,8 @@ public class DataManager {
             frame.pack();
             frame.validate();
             frame.repaint();
+//            new AddImageCommand(2000, 2000, (BufferedImage) imageList.get(0).getImage()).execute(this);
+//            baseImageLabel.updateUI();
         });
         panel.add(openBtn);
 
@@ -81,6 +91,77 @@ public class DataManager {
         });
         panel.add(commandsComboBox);
 
+        addImages();
+        list = new JList(imageList.toArray());
+        setUpDragAndDrop();
+
+        JScrollPane scroll = new JScrollPane(list);
+        scroll.setPreferredSize(new Dimension(150, 400));
+
+        JPanel pContainer = new JPanel();
+        pContainer.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        pContainer.add(scroll, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        JButton addImageButton = new JButton("Add Custom Icon");
+        addImageButton.addActionListener(l -> {
+            new AddImageCommand().execute(this);
+        });
+        pContainer.add(addImageButton, gbc);
+
+
+
+        frame.getContentPane().add(pContainer, BorderLayout.WEST);
         return frame;
+    }
+
+    private void addImages() {
+        ArrayList<BufferedImage> bufferedImageList = new ArrayList<BufferedImage>();
+        imageList = new ArrayList<ImageIcon>();
+
+        try {
+            for (int i = 1; i < 7; i++) {
+                bufferedImageList.add(ImageHelper.scaleImage(
+                        ImageIO.read(new FileInputStream("resources/e" + i + ".png")),
+                        100,
+                        100,
+                        90));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (BufferedImage bufferedImage : bufferedImageList) {
+            imageList.add(new ImageIcon(bufferedImage));
+        }
+    }
+
+    private DataManager root = this;
+
+    private void setUpDragAndDrop() {
+        MouseAdapter ma = new MouseAdapter() {
+            private ImageIcon selectedImage;
+            @Override
+            public void mousePressed(MouseEvent e) {
+                selectedImage = (ImageIcon) list.getSelectedValue();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                double slopeX = 1.0 * (baseImageLabel.getIcon().getIconWidth()) / (baseImageLabel.getWidth());
+                double slopeY = 1.0 * (baseImageLabel.getIcon().getIconHeight()) / (baseImageLabel.getHeight());
+
+
+                int x = (int) Math.round(slopeX * e.getX());
+                int y = (int) Math.round(slopeY * e.getY());
+                new AddImageCommand(x, y, (BufferedImage) selectedImage.getImage()).execute(root);
+                baseImageLabel.updateUI();
+            }
+        };
+
+        list.addMouseListener(ma);
     }
 }
