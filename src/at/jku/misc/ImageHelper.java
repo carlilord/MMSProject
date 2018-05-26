@@ -65,6 +65,10 @@ public class ImageHelper {
 
         }
 
+        if (image.getHeight() < 600 || image.getHeight() < 600) {
+            return image;
+        }
+
         return ImageHelper.scaleImage(image, 600, 600, Image.SCALE_SMOOTH);
     }
 
