@@ -25,7 +25,9 @@ public class DataManager {
 
 
     private JList list;
+    private JScrollPane scroll;
     private ArrayList<ImageIcon> imageList;
+    private DataManager root = this;
 
 
     public JComboBox<Command> commandsComboBox;
@@ -39,7 +41,7 @@ public class DataManager {
         frame = new JFrame("Photoshop 2.0");
         frame.setResizable(false);
         frame.getContentPane().setLayout(new BorderLayout());
-        frame.setPreferredSize(new Dimension(600, 600));
+        frame.setPreferredSize(new Dimension(850, 850));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
@@ -99,8 +101,8 @@ public class DataManager {
         list = new JList(imageList.toArray());
         setUpDragAndDrop();
 
-        JScrollPane scroll = new JScrollPane(list);
-        scroll.setPreferredSize(new Dimension(150, 500));
+        scroll = new JScrollPane(list);
+        scroll.setPreferredSize(new Dimension(150, 750));
 
         JPanel pContainer = new JPanel();
         pContainer.setLayout(new GridBagLayout());
@@ -121,11 +123,11 @@ public class DataManager {
     }
 
     private void addImages() {
-        ArrayList<BufferedImage> bufferedImageList = new ArrayList<BufferedImage>();
-        imageList = new ArrayList<ImageIcon>();
+        ArrayList<BufferedImage> bufferedImageList = new ArrayList<>();
+        imageList = new ArrayList<>();
 
         try {
-            for (int i = 1; i < 7; i++) {
+            for (int i = 1; i < 8; i++) {
                 bufferedImageList.add(ImageHelper.scaleImage(
                         ImageIO.read(new FileInputStream("resources/e" + i + ".png")),
                         100,
@@ -140,8 +142,6 @@ public class DataManager {
             imageList.add(new ImageIcon(bufferedImage));
         }
     }
-
-    private DataManager root = this;
 
     private void setUpDragAndDrop() {
         MouseAdapter ma = new MouseAdapter() {
