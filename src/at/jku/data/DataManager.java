@@ -158,8 +158,8 @@ public class DataManager {
                 double slopeY = 1.0 * (baseImageLabel.getIcon().getIconHeight()) / (baseImageLabel.getHeight());
 
 
-                int x = (int) Math.round(slopeX * e.getX());
-                int y = (int) Math.round(slopeY * e.getY());
+                int x = (int) Math.round(slopeX * (e.getX()-50));
+                int y = (int) Math.round(slopeY * (e.getY()-50));
                 new AddImageCommand(x, y, (BufferedImage) selectedImage.getImage()).execute(root);
                 baseImageLabel.updateUI();
             }
