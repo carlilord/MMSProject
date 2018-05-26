@@ -99,7 +99,7 @@ public class DataManager {
         setUpDragAndDrop();
 
         JScrollPane scroll = new JScrollPane(list);
-        scroll.setPreferredSize(new Dimension(150, 400));
+        scroll.setPreferredSize(new Dimension(150, 500));
 
         JPanel pContainer = new JPanel();
         pContainer.setLayout(new GridBagLayout());
@@ -114,8 +114,6 @@ public class DataManager {
             new AddImageCommand().execute(this);
         });
         pContainer.add(addImageButton, gbc);
-
-
 
         frame.getContentPane().add(pContainer, BorderLayout.WEST);
         return frame;
