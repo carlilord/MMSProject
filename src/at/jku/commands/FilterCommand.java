@@ -3,7 +3,6 @@ package at.jku.commands;
 import at.jku.Filter;
 import at.jku.data.DataManager;
 import at.jku.data.UserDialogChooser;
-import at.jku.filters.SepiaFilter;
 import at.jku.misc.PropertyType;
 
 import javax.swing.*;

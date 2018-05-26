@@ -15,24 +15,21 @@ public class GammaCorrectionFilter implements Filter {
 
         int red, green, blue;
 
-        double gamma_new = gamma;
-        int[] gamma_LUT = gamma_LUT(gamma_new);
+        int[] gammaLookupTable = getGammaLookupTable(gamma);
 
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 Pixel pixel = new Pixel(image.getRGB(i, j));
 
-                red = gamma_LUT[pixel.getR()];
-                green = gamma_LUT[pixel.getG()];
-                blue = gamma_LUT[pixel.getB()];
+                red = gammaLookupTable[pixel.getR()];
+                green = gammaLookupTable[pixel.getG()];
+                blue = gammaLookupTable[pixel.getB()];
 
                 pixel.setR(red);
                 pixel.setG(green);
                 pixel.setB(blue);
 
-                // Write pixels into image
                 image.setRGB(i, j, pixel.getRawRGBA());
-
             }
 
         }
@@ -40,7 +37,7 @@ public class GammaCorrectionFilter implements Filter {
 
     @Override
     public PropertyType getMandatoryProperties() {
-        return new PropertyType(new String[] { "gamma:s:0#2:0" }, UserInput.SIMPLE_NUMBER);
+        return new PropertyType(new String[] { "gamma:s:1#2:1" }, UserInput.SIMPLE_NUMBER);
     }
 
     @Override
@@ -48,13 +45,13 @@ public class GammaCorrectionFilter implements Filter {
         return "Gamma Correction";
     }
 
-    private static int[] gamma_LUT(double gamma_new) {
-        int[] gamma_LUT = new int[256];
+    private static int[] getGammaLookupTable(double gammaNew) {
+        int[] gammaLookupTable = new int[256];
 
-        for (int i = 0; i < gamma_LUT.length; i++) {
-            gamma_LUT[i] = (int) (255 * (Math.pow((double) i / (double) 255, gamma_new)));
+        for (int i = 0; i < gammaLookupTable.length; i++) {
+            gammaLookupTable[i] = (int) (255 * (Math.pow((double) i / (double) 255, gammaNew)));
         }
 
-        return gamma_LUT;
+        return gammaLookupTable;
     }
 }
