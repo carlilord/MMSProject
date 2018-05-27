@@ -11,6 +11,7 @@ public class ScaleImageCommand implements Command {
 
 
     @Override
+    // asks the user for a scaling factor and scales the base images by this factor
     public BufferedImage execute(DataManager dm) {
 
         if (dm.baseImage == null) {

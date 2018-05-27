@@ -22,7 +22,7 @@ public class AddFrameCommand implements Command {
 
     @Override
     public BufferedImage execute(DataManager dm) {
-        
+       
         if (dm.baseImage == null) {
             JOptionPane.showMessageDialog(dm.frame, "SELECT AN IMAGE FIRST", "ERROR", JOptionPane.ERROR_MESSAGE);
             return dm.baseImage;
@@ -31,11 +31,15 @@ public class AddFrameCommand implements Command {
         BufferedImage addFrame = ImageHelper.chooseImage(dm.frame);
         
         try{
+            //Scale frame to size of Image
             Image temp = addFrame.getScaledInstance(framedImage.getWidth(), framedImage.getHeight(), Image.SCALE_SMOOTH);
             BufferedImage scaledImage = new BufferedImage(framedImage.getWidth(), framedImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            
+            //Getting graphics of scaledImage and draw frame on picture
             Graphics g = scaledImage.getGraphics();
             g.drawImage(temp, 0, 0, null);
             g.dispose();
+            //Getting graphics of base Image and draw the frame on picture
             Graphics g2 = framedImage.getGraphics();
             g2.drawImage(temp, 0, 0, null);
             g2.dispose();

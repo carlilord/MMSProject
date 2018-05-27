@@ -29,20 +29,23 @@ public class SharpenImage implements Command {
         }
         
         BufferedImage sharpImage = dm.baseImage;
+        
+        //Matrix with values to sharpen an Image
         Kernel kernel = new Kernel(3, 3, new float[] { -1, -1, -1, 
                                                        -1,  9, -1, 
                                                        -1, -1, -1 });
         
         try{
-            
+        //Get Graphics of base Image and draw it
         Graphics g = sharpImage.getGraphics();
         g.drawImage(sharpImage, 0, 0, null);
         g.dispose();
+        //Creating BufferedImageOp with needed Matrix and filter the Image
         BufferedImageOp biop = new ConvolveOp(kernel);
         sharpImage = biop.filter(sharpImage, null);
 
             dm.frame.remove(dm.baseImageLabel);
-        dm.baseImageLabel = new JLabel(new ImageIcon(sharpImage));
+            dm.baseImageLabel = new JLabel(new ImageIcon(sharpImage));
             dm.frame.add(dm.baseImageLabel);
             dm.frame.pack();
             dm.frame.validate();

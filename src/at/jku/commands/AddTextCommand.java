@@ -25,6 +25,7 @@ public class AddTextCommand implements Command{
             return dm.baseImage;
         }
         
+        //User input
         String text = JOptionPane.showInputDialog(dm.frame, "Text you want to add: ");
         String xPosition = JOptionPane.showInputDialog(dm.frame, "Position x coordinate: " + "(Image width is " + dm.baseImage.getWidth());
         String yPosition = JOptionPane.showInputDialog(dm.frame, "Position x coordinate: " + "(Image height is " + dm.baseImage.getHeight());
@@ -32,13 +33,17 @@ public class AddTextCommand implements Command{
         BufferedImage textImage = dm.baseImage;
 
         try{
+            //Parse String to int
             int xPos = Integer.parseInt(xPosition);
             int yPos = Integer.parseInt(yPosition);
             int textSize = Integer.parseInt(size);
 
             Graphics g = textImage.getGraphics();
+            
+            //ColorChooser to choose color
             Color color = JColorChooser.showDialog(null, "Choose color", null);
-
+            
+            //Draw Image,set the Color + Font of String and finally draw String
             g.drawImage(textImage, 0, 0, null);
             g.setColor(color);
             g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, textSize));
