@@ -53,6 +53,7 @@ public class AddImageCommand implements Command{
             y = Integer.parseInt(JOptionPane.showInputDialog(dm.frame, "Position y coordinate for image: " + "(Image height is " + dm.baseImage.getHeight()));
         }
         BufferedImage firstImage = dm.baseImage;
+
         
         try{
             Graphics g = firstImage.getGraphics();
@@ -65,6 +66,8 @@ public class AddImageCommand implements Command{
             dm.frame.pack();
             dm.frame.validate();
             dm.frame.repaint();
+
+
             
         } catch (ClassCastException e) {
             JOptionPane.showMessageDialog(dm.frame, "ONLY NUMBERS ALLOWED", "ERROR", JOptionPane.ERROR_MESSAGE);

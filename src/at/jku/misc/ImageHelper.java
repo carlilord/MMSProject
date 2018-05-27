@@ -76,11 +76,13 @@ public class ImageHelper {
         JFileChooser jfc = new JFileChooser();
         int dialogValue = jfc.showSaveDialog(frame);
 
+
+
         if (dialogValue == JFileChooser.APPROVE_OPTION) {
 
             File out = jfc.getSelectedFile();
             try {
-                ImageIO.write(image, "jpg", out);
+                ImageIO.write(image, "png", out);
                 JOptionPane.showMessageDialog(frame, "Image saved succesfully ", "SAVED", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e) {
                 e.printStackTrace();
