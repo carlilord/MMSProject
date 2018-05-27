@@ -17,9 +17,13 @@ import java.util.ArrayList;
 
 public class DataManager {
 
+    // main frame that holds the other containers
     public JFrame frame;
 
+    // image that you load at the beginning and the image that gets saved with the save button
     public BufferedImage baseImage;
+
+    // displays the baseImage to the screen
     public JLabel baseImageLabel;
 
 
@@ -28,7 +32,7 @@ public class DataManager {
     private ArrayList<ImageIcon> imageList;
     private DataManager root = this;
 
-
+    // holds the commands that can be executed in the dropdown list
     public JComboBox<Command> commandsComboBox;
     public CommandManager commandManager = new CommandManager();
 
@@ -36,6 +40,8 @@ public class DataManager {
         createFrame();
     }
 
+
+    // initialitzs the frame and gets called at the start of the main app
     private JFrame createFrame() {
         frame = new JFrame("Photoshop 2.0");
         frame.setResizable(false);
@@ -144,6 +150,7 @@ public class DataManager {
         }
     }
 
+    
     private void setUpDragAndDrop() {
         MouseAdapter ma = new MouseAdapter() {
             private ImageIcon selectedImage;

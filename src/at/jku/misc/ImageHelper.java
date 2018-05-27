@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImageHelper {
+
+    // scales the size of the given image
     public static BufferedImage scaleImage(BufferedImage image, int maxWidth,
       int maxHeight, int quality) {
         BufferedImage scaled;
@@ -42,7 +44,7 @@ public class ImageHelper {
                 .drawImage(img, 0, 0, null);
         return bufferedImage;
     }
-
+    // lets the user choose an image from his disk and returns it
     public static BufferedImage chooseImage(JFrame frame) {
 
         JFileChooser jfc = new JFileChooser();
@@ -72,6 +74,7 @@ public class ImageHelper {
         return ImageHelper.scaleImage(image, 600, 600, Image.SCALE_SMOOTH);
     }
 
+    // saves the baseimage to the selected destination
     public static void saveImage(BufferedImage image, JFrame frame) {
         JFileChooser jfc = new JFileChooser();
         int dialogValue = jfc.showSaveDialog(frame);

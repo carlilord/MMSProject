@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class Main {
 
+    // stores all the necessary data
     public DataManager dm;
 
     public Main() {
