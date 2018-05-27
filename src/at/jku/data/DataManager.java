@@ -128,7 +128,7 @@ public class DataManager {
         imageList = new ArrayList<>();
 
         try {
-            for (int i = 1; i < 20; i++) {
+            for (int i = 1; i < 17; i++) {
                 bufferedImageList.add(ImageHelper.scaleImage(
                         ImageIO.read(new FileInputStream("resources/e" + i + ".png")),
                         100,
