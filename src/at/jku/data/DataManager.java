@@ -169,7 +169,7 @@ public class DataManager {
                 if (list.getLastVisibleIndex() > 7) {
                     offset = 100 * list.getFirstVisibleIndex();
                 }
-                 
+
                 int actualY = e.getY() - offset - selectedImage.getIconWidth() / 2;
                 actualY = actualY < 0 ? 0 : actualY;
 
