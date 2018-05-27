@@ -5,6 +5,7 @@ import at.jku.misc.UserInput;
 import java.awt.*;
 import java.util.Properties;
 
+
 public class UserDialogChooser {
     private String[] config;
 
@@ -38,10 +39,8 @@ public class UserDialogChooser {
                 buffer.append(max);
                 buffer.append(")");
             }
-            String msg = buffer.toString();
 
             String val = UserDialogFactory.getValueForUserInputType(parent, "Enter a value for " + name, userInput, min, max);
-
             try {
                 double doubleValue = Double.parseDouble(val);
                 if(i < min) {
@@ -61,6 +60,10 @@ public class UserDialogChooser {
         return properties;
     }
 
+    /**
+     * Retrieves the boundries, name and tyoe of a parameter
+     * @param configuration the parameter in String format
+     */
     private void parseConfig(String configuration) {
         String[] options = configuration.split(":");
         name = options[0];

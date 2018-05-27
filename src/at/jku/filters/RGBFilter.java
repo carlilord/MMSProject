@@ -8,6 +8,7 @@ import at.jku.pixels.Pixel;
 import java.awt.image.BufferedImage;
 import java.util.Properties;
 
+// Changes the RGB composition based on percentages
 public class RGBFilter implements Filter {
     @Override
     public void applyFilter(BufferedImage image, Properties settings) {

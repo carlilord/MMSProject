@@ -12,9 +12,7 @@ public class GammaCorrectionFilter implements Filter {
     @Override
     public void applyFilter(BufferedImage image, Properties settings) {
         double gamma = Double.parseDouble(settings.getProperty("gamma"));
-
         int red, green, blue;
-
         int[] gammaLookupTable = getGammaLookupTable(gamma);
 
         for (int i = 0; i < image.getWidth(); i++) {
@@ -31,7 +29,6 @@ public class GammaCorrectionFilter implements Filter {
 
                 image.setRGB(i, j, pixel.getRawRGBA());
             }
-
         }
     }
 

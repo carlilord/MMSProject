@@ -1,10 +1,10 @@
 package at.jku.data.userdialogs;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
+// Returns a simple slider dialog
 public class SimpleSliderDialog {
     public static JOptionPane getSlider(Component parent, String message, int min, int max) {
         JOptionPane optionPane = new JOptionPane();

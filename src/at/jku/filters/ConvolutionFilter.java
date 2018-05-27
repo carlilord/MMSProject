@@ -8,6 +8,9 @@ import at.jku.pixels.Pixel;
 import java.awt.image.BufferedImage;
 import java.util.Properties;
 
+/**
+ *  The Convolution Filter Algorithm
+ */
 public class ConvolutionFilter implements Filter {
     //Blur Filtermatrix
     double meanFilter[][] =
@@ -40,8 +43,10 @@ public class ConvolutionFilter implements Filter {
                     {0, 0, 0, 0, 0, 0, 0, 1},
             };
 
+    // The name which will be displayed
     String filterName;
 
+    // The filter which will be used
     double currentFilter[][];
 
     int filterHeight;
@@ -63,6 +68,8 @@ public class ConvolutionFilter implements Filter {
                 int newValueR = 0;
                 int newValueG = 0;
                 int newValueB = 0;
+
+                // Calculating the new value for the pixel
                 for (int i = 0; i < filterWidth; i++) {
                     for (int j = 0; j < filterHeight; j++) {
                         int newX = x - ((filterWidth / 2) - i);
