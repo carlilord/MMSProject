@@ -154,16 +154,28 @@ public class DataManager {
 
             @Override
             public void mouseReleased(MouseEvent e) {
+                if (baseImageLabel == null) {
+                    return;
+                }
                 double slopeX = 1.0 * (baseImageLabel.getIcon().getIconWidth()) / (baseImageLabel.getWidth());
                 double slopeY = 1.0 * (baseImageLabel.getIcon().getIconHeight()) / (baseImageLabel.getHeight());
 
                 int actualX = e.getX()- list.getWidth() -selectedImage.getIconWidth()/2;
                 actualX = actualX < 0 ? 0 : actualX;
-                int actualY = e.getY() - selectedImage.getIconWidth()/2;
+                System.out.println(list.getFirstVisibleIndex());
+                System.out.println(list.getLastVisibleIndex());
+                int offset = 0;
+
+                if (list.getLastVisibleIndex() > 7) {
+                    offset = 100 * list.getFirstVisibleIndex();
+                }
+                 
+                int actualY = e.getY() - offset - selectedImage.getIconWidth() / 2;
                 actualY = actualY < 0 ? 0 : actualY;
 
                 int x = (int) Math.round(slopeX * actualX);
                 int y = (int) Math.round(slopeY * actualY);
+
                 new AddImageCommand(x, y, (BufferedImage) selectedImage.getImage()).execute(root);
                 baseImageLabel.updateUI();
             }
