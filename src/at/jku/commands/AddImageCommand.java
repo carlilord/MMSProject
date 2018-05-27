@@ -45,7 +45,7 @@ public class AddImageCommand implements Command{
             return dm.baseImage;
         }
         
-        //
+        //User input
 
         if(userInput == UserInput.SIMPLE_NUMBER) {
             addImage = ImageHelper.chooseImage(dm.frame);
@@ -56,6 +56,7 @@ public class AddImageCommand implements Command{
 
         
         try{
+            //Get Graphics of base Image and draw the first Image, then draw the second Image you want to add
             Graphics g = firstImage.getGraphics();
             g.drawImage(firstImage, 0, 0, null);
             g.drawImage(addImage, x, y, null);
