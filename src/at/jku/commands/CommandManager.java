@@ -16,6 +16,7 @@ public class CommandManager {
         commands.add(new FilterCommand(new SepiaFilter()));
         commands.add(new AddImageCommand());
         commands.add(new SharpenImage());
+        commands.add(new AddFrameCommand());
         commands.add(new FilterCommand(new ConvolutionFilter(ConvolutionType.BLUR)));
         commands.add(new FilterCommand(new ConvolutionFilter(ConvolutionType.MEAN)));
         commands.add(new FilterCommand(new ConvolutionFilter(ConvolutionType.MOTION)));
