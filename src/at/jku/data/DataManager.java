@@ -3,7 +3,6 @@ package at.jku.data;
 import at.jku.commands.AddImageCommand;
 import at.jku.commands.Command;
 import at.jku.commands.CommandManager;
-import at.jku.data.userdialogs.SimpleSliderDialog;
 import at.jku.misc.ImageHelper;
 
 import javax.imageio.ImageIO;
@@ -61,6 +60,7 @@ public class DataManager {
 
             baseImage = ImageHelper.chooseImage(frame);
             baseImageLabel = new JLabel(new ImageIcon(baseImage));
+
             frame.getContentPane().add(baseImageLabel, BorderLayout.CENTER);
             frame.pack();
             frame.validate();
@@ -84,6 +84,7 @@ public class DataManager {
 
         });
         panel.add(saveBtn);
+
 
         // Command Drop down menu
         commandsComboBox = new JComboBox<>(new DefaultComboBoxModel<>(commandManager.getCommands()));
